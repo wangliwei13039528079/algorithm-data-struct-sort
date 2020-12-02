@@ -4,7 +4,7 @@ import com.sun.org.apache.bcel.internal.generic.SWAP;
 import com.sun.scenario.effect.impl.sw.java.JSWColorAdjustPeer;
 import org.junit.Test;
 
-public class alogrithem {
+public class Sort {
 
     @Test
     public void DirectInsertSort(){

@@ -1,44 +1,49 @@
 package sample;
 
+import org.junit.Test;
+
 public class MergeSort {
-    public static void main(String args[]) {
+
+
+
+    public void merge(int a[],int low,int mid,int high){
+        int b[] = new int[high+1];
+        int i,j,k;
+        for(i=0;i<=high;i++){
+            b[i] = a[i];
+        }
+        for(i=low,j=mid+1,k=i;i<=mid&&j<=high;k++){
+            if(b[i]<=b[j]){
+                a[k] = b[i++];
+            }else {
+                a[k] = b[j++];
+            }
+        }
+        while (i<=mid){
+            a[k++] = b[i++];
+        }
+        while (j<=high){
+            a[k++] = b[j++];
+        }
+    }
+
+
+    public void mergeSort(int a[],int low,int high){
+        if(low<high){
+            int mid = (low+high)/2;
+            mergeSort(a,low,mid);
+            mergeSort(a,mid+1,high);
+            merge(a,low,mid,high);
+        }
+    }
+
+    @Test
+    public void Test(){
         int[] arr = {9,8,7,6,5,4,3,2,1};
-        sort(arr, 0, arr.length - 1);
+        //sort(arr, 0, arr.length -1);
+        mergeSort(arr,0,arr.length-1);
         for(int i=0;i<arr.length;i++){
             System.out.print(arr[i]+"  ");
-        }
-    }
-
-    public static void sort(int[] arr, int L, int R) {
-        if(L == R) {
-            return;
-        }
-        int mid = L + ((R - L) >> 1);
-        sort(arr, L, mid);
-        sort(arr, mid + 1, R);
-        merge(arr, L, mid, R);
-    }
-
-    public static void merge(int[] arr, int L, int mid, int R) {
-        int[] temp = new int[R - L + 1];
-        int i = 0;
-        int p1 = L;
-        int p2 = mid + 1;
-        // 比较左右两部分的元素，哪个小，把那个元素填入temp中
-        while(p1 <= mid && p2 <= R) {
-            temp[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++];
-        }
-        // 上面的循环退出后，把剩余的元素依次填入到temp中
-        // 以下两个while只有一个会执行
-        while(p1 <= mid) {
-            temp[i++] = arr[p1++];
-        }
-        while(p2 <= R) {
-            temp[i++] = arr[p2++];
-        }
-        // 把最终的排序的结果复制给原数组
-        for(i = 0; i < temp.length; i++) {
-            arr[L + i] = temp[i];
         }
     }
 }
