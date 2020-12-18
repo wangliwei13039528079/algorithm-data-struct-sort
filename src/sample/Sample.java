@@ -73,5 +73,26 @@ public class Sample {
     }
 
 
+    @Test
+    public void Test4(){
+        System.out.println(mySqrt(2147395599));
+    }
+
+
+    public int mySqrt(int x) {
+        double e = 0.000001;
+        double high = x*1.0;
+        double low = 0;
+        double mid = (low+high)/2;
+        while ((high-low)>e){
+            if(mid*mid>x){
+                high = mid;
+            }else {
+                low = mid;
+            }
+            mid = (low+high)/2;
+        }
+        return (int)high;
+    }
 
 }
